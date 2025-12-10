@@ -3,6 +3,7 @@
 // Note this file should generally be restricted to simple struct/enum
 // definitions that do not contain business logic.
 
+use crate::protocol::AskForApproval;
 use serde::Deserializer;
 use std::collections::HashMap;
 use std::path::PathBuf;
@@ -14,6 +15,11 @@ use serde::Serialize;
 use serde::de::Error as SerdeError;
 
 pub const DEFAULT_OTEL_ENVIRONMENT: &str = "dev";
+
+#[derive(Deserialize, Debug, Clone, Default, PartialEq)]
+pub struct AdminPolicyToml {
+    pub allowed_approval_policies: Option<Vec<AskForApproval>>,
+}
 
 #[derive(Serialize, Debug, Clone, PartialEq)]
 pub struct McpServerConfig {
